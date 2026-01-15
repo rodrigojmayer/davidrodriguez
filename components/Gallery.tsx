@@ -6,7 +6,10 @@ interface GalleryProps {
   images: GalleryImage[];
 }
 
-const Gallery: React.FC<GalleryProps> = ({ images }) => {
+const Gallery: React.FC<GalleryProps> = ({ images=[] }) => {
+  if (!images || images.length === 0) {
+    return <p className="text-center py-10 text-gray-500">Cargando trabajos...</p>
+  }
   const [filter, setFilter] = useState<string>('Todos');
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 

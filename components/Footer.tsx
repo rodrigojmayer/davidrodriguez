@@ -9,9 +9,15 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-center md:items-start">
              <div className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-bold text-white italic">DR</div>
-              <span className="text-xl font-bold tracking-tight">David Rodriguez</span>
+              {/* Hidden admin trigger for the owner */}
+                {/* <button 
+                  className="fixed bottom-4  w-8 h-8 opacity-100 hover:opacity-10 transition-opacity bg-gray-400 rounded-full"
+                  onClick={() => window.location.hash = '#david'}
+                  title="David"
+                /> */}
+              <span className="text-xl font-bold tracking-tight" onClick={() => window.location.hash = '#david'}>David Rodriguez</span>
             </div>
-            <p className="text-gray-500 text-sm max-w-xs text-center md:text-left">
+            <p className="text-gray-500 text-sm max-w-xs text-center md:text-left" onClick={() => window.location.hash = '#logout'}>
               Calidad premium en reparación y pintura automotriz desde hace más de 10 años en la localidad de Pueblo Esther.
             </p>
           </div>
