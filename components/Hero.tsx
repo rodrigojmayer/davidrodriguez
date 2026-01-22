@@ -8,7 +8,10 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920")',
+          // backgroundImage: 'url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920")',
+          // backgroundImage: 'url("../imgs/background01.jpg")',
+          // backgroundImage: 'url("../imgs/background02.jpeg")',
+          backgroundImage: 'url("../imgs/background03.jpeg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}

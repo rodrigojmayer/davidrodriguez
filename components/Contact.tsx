@@ -7,7 +7,7 @@ const Contact: React.FC = () => {
       <div className="text-center mb-16">
         <h2 className="text-blue-600 font-bold uppercase tracking-widest mb-2">Contacto</h2>
         <h3 className="text-4xl font-bold text-gray-900 mb-6 font-title">¿Presupuesto sin cargo?</h3>
-        <p className="text-gray-600 text-lg">Envianos una foto de tu daño por WhatsApp o completa el formulario y te responderemos en el día.</p>
+        <p className="text-gray-600 text-lg">Envianos una foto de tu daño por WhatsApp y te responderemos en el día.</p>
       </div>
 
       {/* <div className="grid grid-cols-1 lg:grid-cols-1 gap-2 mb-16"> */}
@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-bold">Llamanos</p>
-                  <p className="text-gray-400">+54 341 123-4567</p>
+                  <p className="text-gray-400">+54 341 652-4309</p>
                 </div>
               </div>
 
@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-bold">WhatsApp Directo</p>
-                  <p className="text-gray-400">Consultas rápidas: +54 9 341 555-9876</p>
+                  <p className="text-gray-400">Consultas rápidas: +54 341 652-4309</p>
                 </div>
               </div>
 
