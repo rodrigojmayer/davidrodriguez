@@ -42,12 +42,12 @@ const Header: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <a 
+          {/* <a 
             href="#contacto" 
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-bold transition-all transform hover:scale-105"
           >
             SOLICITAR PRESUPUESTO
-          </a>
+          </a> */}
         </nav>
 
         {/* Mobile Toggle */}
@@ -79,13 +79,13 @@ const Header: React.FC = () => {
                 {link.name}
               </a>
             ))}
-            <a 
+            {/* <a 
               href="#contacto" 
               className="bg-blue-600 text-white px-6 py-3 rounded text-center font-bold"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               SOLICITAR PRESUPUESTO
-            </a>
+            </a> */}
           </div>
         </div>
       )}
