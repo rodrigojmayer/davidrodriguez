@@ -95,8 +95,23 @@ const App: React.FC = () => {
     setImages(prev => [newImg, ...prev]);
   };
 
-  const deleteImage = (id: string) => {
-    setImages(prev => prev.filter(img => img.id !== id));
+  const deleteImage = async (id: string) => {
+    
+    // if (!confirm("¿Estás seguro de que quieres eliminar esta imagen?")) return;
+
+    try {
+      // 1. Crear la referencia al document especifico
+      const imageDoc = doc(db, "imagenes", id);
+
+      // 2. Ejecutar la eliminacion en Firestore
+      await deleteDoc(imageDoc);
+
+      console.log("Documento eliminado con éxito");
+      setImages(prev => prev.filter(img => img.id !== id));
+    } catch (error) {
+        console.error("Error al eliminarel documento:", error);
+        alert("No se pudo eliminar la imagen de la base de datos.");
+      }
   };
 
   const toggleFeatured = (id: string) => {
