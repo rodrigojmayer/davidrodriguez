@@ -16,7 +16,12 @@ export const uploadImage = async (file: File) => {
       { method: "POST", body: formData }
     );
     const data = await response.json();
-    return data.secure_url; 
+    // return data.secure_url; 
+    return {
+      imageUrl: data.secure_url,
+      publicId: data.public_id
+    };
+
   } catch (error) {
     console.error("Error en Cloudinary:", error);
     return null;
@@ -26,7 +31,8 @@ export const uploadImage = async (file: File) => {
 interface AdminPanelProps {
   images: GalleryImage[];
   // onAdd: (img: Omit<GalleryImage, 'id'>) => void;
-  onAdd: (file: File, title: string, category: string) => Promise<void>;
+  // onAdd: (file: File, title: string, category: string) => Promise<void>;
+  onAdd: (file: File, title: string) => Promise<void>;
   onDelete: (id: string) => void;
   onToggleFeatured: (id: string, currentStatus: boolean) => void;
 }
@@ -34,7 +40,7 @@ interface AdminPanelProps {
 const AdminPanel: React.FC<AdminPanelProps> = ({ images, onAdd, onDelete, onToggleFeatured }) => {
   // const [newUrl, setNewUrl] = useState('');
   const [newTitle, setNewTitle] = useState('');
-  const [newCat, setNewCat] = useState<GalleryImage['category']>('Terminado');
+  // const [newCat, setNewCat] = useState<GalleryImage['category']>('Terminado');
   const [isUploading, setIsUploading] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -60,7 +66,8 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ images, onAdd, onDelete, onTogg
     setIsUploading(true);
     try {
       // Llamamos a la funcion que pasamos por props
-      await onAdd(selectedFile, newTitle, newCat);
+      // await onAdd(selectedFile, newTitle, newCat);
+      await onAdd(selectedFile, newTitle);
 
       // Limpiamos el formulario después de subir con éxito
       setSelectedFile(null);
@@ -120,7 +127,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ images, onAdd, onDelete, onTogg
           </div>
           
           {/* 3. CATEGORÍA */}
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <label className="text-xs font-bold text-gray-500 uppercase">Categoría</label>
             <select 
               value={newCat}
@@ -132,7 +139,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ images, onAdd, onDelete, onTogg
               <option value="Proceso">Proceso</option>
               <option value="Terminado">Terminado</option>
             </select>
-          </div>
+          </div> */}
 
           {/* 4. BOTÓN DE ACCIÓN (Ahora sí dispara la subida) */}
           <div className="md:col-span-1">
@@ -179,7 +186,10 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ images, onAdd, onDelete, onTogg
                   </button>
                   <button 
                     // onClick={() => onDelete(img.id)}
-                    onClick={() => confirmDelete(img.id)}
+                    onClick={() => {
+                      console.log("img: ", img)
+                      confirmDelete(img.id)}
+                    }
                     className="p-1.5 text-red-500 bg-red-50 hover:bg-red-100 rounded-full transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
