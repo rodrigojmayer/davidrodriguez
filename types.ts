@@ -2,7 +2,7 @@
 export interface GalleryImage {
   id: string;
   url: string;
-  category: 'Antes' | 'Después' | 'Proceso' | 'Terminado';
+  // category: 'Antes' | 'Después' | 'Proceso' | 'Terminado';
   title: string;
   featured: boolean;
 }

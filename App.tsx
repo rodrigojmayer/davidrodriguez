@@ -15,14 +15,14 @@ import { collection, onSnapshot, query, orderBy, addDoc, deleteDoc, doc, updateD
 // 1. Importamos el componente (default) y la función (nombrada)
 import AdminPanel, { uploadImage } from './components/AdminPanel';
 
-const INITIAL_GALLERY: GalleryImage[] = [
-  { id: '1', url: 'https://picsum.photos/id/111/800/600', category: 'Terminado', title: 'Restauración BMW M3', featured: true },
-  { id: '2', url: 'https://picsum.photos/id/183/800/600', category: 'Antes', title: 'Daño Paragolpes', featured: false },
-  { id: '3', url: 'https://picsum.photos/id/133/800/600', category: 'Proceso', title: 'Cabina de Pintura', featured: false },
-  { id: '4', url: 'https://picsum.photos/id/146/800/600', category: 'Después', title: 'Acabado Espejo', featured: true },
-  { id: '5', url: 'https://picsum.photos/id/1071/800/600', category: 'Terminado', title: 'Pulido cerámico', featured: false },
-  { id: '6', url: 'https://picsum.photos/id/1072/800/600', category: 'Proceso', title: 'Lijado al agua', featured: false },
-];
+// const INITIAL_GALLERY: GalleryImage[] = [
+//   { id: '1', url: 'https://picsum.photos/id/111/800/600', category: 'Terminado', title: 'Restauración BMW M3', featured: true },
+//   { id: '2', url: 'https://picsum.photos/id/183/800/600', category: 'Antes', title: 'Daño Paragolpes', featured: false },
+//   { id: '3', url: 'https://picsum.photos/id/133/800/600', category: 'Proceso', title: 'Cabina de Pintura', featured: false },
+//   { id: '4', url: 'https://picsum.photos/id/146/800/600', category: 'Después', title: 'Acabado Espejo', featured: true },
+//   { id: '5', url: 'https://picsum.photos/id/1071/800/600', category: 'Terminado', title: 'Pulido cerámico', featured: false },
+//   { id: '6', url: 'https://picsum.photos/id/1072/800/600', category: 'Proceso', title: 'Lijado al agua', featured: false },
+// ];
 
 const App: React.FC = () => {
   const [images, setImages] = useState<GalleryImage[]>(() => {
@@ -96,16 +96,11 @@ const App: React.FC = () => {
   };
 
   const deleteImage = async (id: string) => {
-    
-    // if (!confirm("¿Estás seguro de que quieres eliminar esta imagen?")) return;
-
     try {
       // 1. Crear la referencia al document especifico
       const imageDoc = doc(db, "imagenes", id);
-
       // 2. Ejecutar la eliminacion en Firestore
       await deleteDoc(imageDoc);
-
       console.log("Documento eliminado con éxito");
       setImages(prev => prev.filter(img => img.id !== id));
     } catch (error) {
@@ -113,6 +108,22 @@ const App: React.FC = () => {
         alert("No se pudo eliminar la imagen de la base de datos.");
       }
   };
+
+  
+
+  // const deleteImage = async (id: string) => {
+  //   try {
+  //     // 1. Crear la referencia al document especifico
+  //     const imageDoc = doc(db, "imagenes", id);
+  //     // 2. Ejecutar la eliminacion en Firestore
+  //     await updateDoc(imageDoc);
+  //     console.log("Documento eliminado con éxito");
+  //     setImages(prev => prev.filter(img => img.id !== id));
+  //   } catch (error) {
+  //       console.error("Error al eliminarel documento:", error);
+  //       alert("No se pudo eliminar la imagen de la base de datos.");
+  //     }
+  // };
 
   const toggleFeatured = (id: string) => {
     setImages(prev => prev.map(img => img.id === id ? { ...img, featured: !img.featured } : img));
@@ -188,17 +199,19 @@ const App: React.FC = () => {
   //   }
   // };
 
-  const handleAddImage = async (file: File, title: string, category: string) => {
+  // const handleAddImage = async (file: File, title: string, category: string) => {
+  const handleAddImage = async (file: File, title: string) => {
     // 1. Subir a Cloudinary
-    const imageUrl = await uploadImage(file);
-
+    const { imageUrl, publicId } = await uploadImage(file);
+    
     if (imageUrl) {
       try {
         // 2. Guardar en Firestore con los datos que vienen del AdminPanel
         await addDoc(collection(db, "imagenes"), {
           url: imageUrl,
-          category: category, 
-          title: title || 'Trabajo realizado',
+          publicId: publicId,
+          // category: category, 
+          title: title,
           featured: false,
           createdAt: new Date()
         });

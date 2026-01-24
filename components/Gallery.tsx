@@ -13,11 +13,12 @@ const Gallery: React.FC<GalleryProps> = ({ images=[] }) => {
   const [filter, setFilter] = useState<string>('Todos');
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
-  const categories = ['Todos', 'Antes', 'Después', 'Proceso', 'Terminado'];
+  // const categories = ['Todos', 'Antes', 'Después', 'Proceso', 'Terminado'];
 
-  const filteredImages = filter === 'Todos' 
-    ? images 
-    : images.filter(img => img.category === filter);
+  // const filteredImages = filter === 'Todos' 
+  //   ? images 
+  //   : images.filter(img => img.category === filter);
+  const filteredImages = images;
 
   return (
     <div className="container mx-auto px-4">
@@ -26,7 +27,7 @@ const Gallery: React.FC<GalleryProps> = ({ images=[] }) => {
         <h3 className="text-4xl font-bold text-gray-900 mb-8 font-title">Galería de Resultados</h3>
         
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {/* <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -40,7 +41,7 @@ const Gallery: React.FC<GalleryProps> = ({ images=[] }) => {
               {cat}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Grid */}
@@ -58,7 +59,7 @@ const Gallery: React.FC<GalleryProps> = ({ images=[] }) => {
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
-              <span className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-1">{image.category}</span>
+              {/* <span className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-1">{image.category}</span> */}
               <h4 className="text-white font-bold text-lg">{image.title}</h4>
               <div className="mt-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm self-end">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +98,7 @@ const Gallery: React.FC<GalleryProps> = ({ images=[] }) => {
             />
             <div className="mt-4 text-center">
               <h4 className="text-2xl font-bold text-white mb-1">{selectedImage.title}</h4>
-              <span className="text-blue-400 font-medium uppercase tracking-widest">{selectedImage.category}</span>
+              {/* <span className="text-blue-400 font-medium uppercase tracking-widest">{selectedImage.category}</span> */}
             </div>
           </div>
         </div>
