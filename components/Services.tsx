@@ -19,7 +19,7 @@ const services = [
     icon: ICONS.Car
   },
   {
-    title: 'Detailing & Pulido',
+    title: 'Detalle & Pulido',
     description: 'Tratamientos cerámicos, acrílicos y limpieza de interiores de nivel exposición.',
     icon: ICONS.Sparkle
   },
