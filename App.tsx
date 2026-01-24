@@ -11,7 +11,7 @@ import { GalleryImage } from './types';
 import { auth, googleProvider } from "./lib/firebase";
 import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "./lib/firebase";
-import { collection, onSnapshot, query, orderBy, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy, addDoc, deleteDoc, doc, updateDoc, where } from "firebase/firestore";
 // 1. Importamos el componente (default) y la función (nombrada)
 import AdminPanel, { uploadImage } from './components/AdminPanel';
 
@@ -43,7 +43,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Referencia a la colección "imagenes" en Firestore
-    const q = query(collection(db, "imagenes"), orderBy("createdAt", "desc"));
+    const q = query(
+      collection(db, "imagenes"), 
+      where("status", "!=", "deleted"),
+      orderBy("status"),
+      orderBy("createdAt", "desc")
+    );
     
     // Escuchar cambios en tiempo real
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -95,28 +100,12 @@ const App: React.FC = () => {
     setImages(prev => [newImg, ...prev]);
   };
 
-  const deleteImage = async (id: string) => {
-    try {
-      // 1. Crear la referencia al document especifico
-      const imageDoc = doc(db, "imagenes", id);
-      // 2. Ejecutar la eliminacion en Firestore
-      await deleteDoc(imageDoc);
-      console.log("Documento eliminado con éxito");
-      setImages(prev => prev.filter(img => img.id !== id));
-    } catch (error) {
-        console.error("Error al eliminarel documento:", error);
-        alert("No se pudo eliminar la imagen de la base de datos.");
-      }
-  };
-
-  
-
   // const deleteImage = async (id: string) => {
   //   try {
   //     // 1. Crear la referencia al document especifico
   //     const imageDoc = doc(db, "imagenes", id);
   //     // 2. Ejecutar la eliminacion en Firestore
-  //     await updateDoc(imageDoc);
+  //     await deleteDoc(imageDoc);
   //     console.log("Documento eliminado con éxito");
   //     setImages(prev => prev.filter(img => img.id !== id));
   //   } catch (error) {
@@ -124,6 +113,26 @@ const App: React.FC = () => {
   //       alert("No se pudo eliminar la imagen de la base de datos.");
   //     }
   // };
+
+  
+
+  const deleteImage = async (id: string, publicId: string) => {
+    try {
+      // 1. Crear la referencia al document especifico
+      const imageDoc = doc(db, "imagenes", id);
+      // 2. Ejecutar la eliminacion en Firestore
+      await updateDoc(imageDoc, {
+        status: "deleted",
+        deletedAt: new Date(),
+        publicId: publicId
+      });
+      console.log("Documento eliminado con éxito");
+      setImages(prev => prev.filter(img => img.id !== id));
+    } catch (error) {
+        console.error("Error al eliminarel documento:", error);
+        alert("No se pudo eliminar la imagen de la base de datos.");
+      }
+  };
 
   const toggleFeatured = (id: string) => {
     setImages(prev => prev.map(img => img.id === id ? { ...img, featured: !img.featured } : img));

@@ -33,7 +33,7 @@ interface AdminPanelProps {
   // onAdd: (img: Omit<GalleryImage, 'id'>) => void;
   // onAdd: (file: File, title: string, category: string) => Promise<void>;
   onAdd: (file: File, title: string) => Promise<void>;
-  onDelete: (id: string) => void;
+  onDelete: (id: string, publicId: string) => void;
   onToggleFeatured: (id: string, currentStatus: boolean) => void;
 }
 
@@ -44,14 +44,14 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ images, onAdd, onDelete, onTogg
   const [isUploading, setIsUploading] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [imageToDelete, setImageToDelete] = useState<string | null>(null);
+  const [imageToDelete, setImageToDelete] = useState<Object | null>(null);
 
-  const confirmDelete = (id: string) => {
-    setImageToDelete(id);
+  const confirmDelete = (id: string, publicId: string) => {
+    setImageToDelete({id, publicId});
   };
   const handleFinalDelete = async () => {
     if (imageToDelete) {
-      await onDelete(imageToDelete);
+      await onDelete(imageToDelete.id, imageToDelete.publicId);
       setImageToDelete(null);
     }
   }
@@ -187,8 +187,8 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ images, onAdd, onDelete, onTogg
                   <button 
                     // onClick={() => onDelete(img.id)}
                     onClick={() => {
-                      console.log("img: ", img)
-                      confirmDelete(img.id)}
+                      // console.log("img: ", img)
+                      confirmDelete(img.id, img.publicId)}
                     }
                     className="p-1.5 text-red-500 bg-red-50 hover:bg-red-100 rounded-full transition-colors"
                   >
