@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '18'
       - run: npm install firebase-admin cloudinary
-      - run: node cleanup.jobs
+      - run: node cleanup.js
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
