@@ -1,7 +1,7 @@
 name: Limpieza Diaria de Cloudinary
 on: 
   schedule:
-    - cron: '0 0 * * *' # Corre todas las noches a las 00:00
+    - cron: '30 3 * * *' # Corre todas las noches a las 00:00
   workflow_dispatch: # Permite ejecutarlo manualmente para probar
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
       - run: npm install firebase-admin cloudinary
       - run: node cleanup.js
         env:
