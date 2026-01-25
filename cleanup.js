@@ -36,8 +36,14 @@ async function run() {
         const data = doc.data();
         const fechaEliminado = data.deletedAt.toDate().getTime();
 
-        if (ahora - fechaEliminado > unDiaEnMs) {
-            console.log(`Eliminado: ${data.publicId}`);
+        // Busca esta línea:
+        // if (ahora - fechaEliminado > unDiaEnMs) {
+        //     console.log(`Eliminado: ${data.publicId}`);
+
+        // Y cámbiala temporalmente por esta:
+        if (true) { 
+        console.log(`Eliminando permanentemente (MODO PRUEBA): ${data.publicId}`);
+        
            try {
                 // Borrar de Cloudinary
                 await cloudinary.uploader.destroy(data.publicId);
