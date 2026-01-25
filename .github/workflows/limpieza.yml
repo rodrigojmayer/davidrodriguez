@@ -3,7 +3,9 @@ on:
   schedule:
     - cron: '0 */2 * * *' # Corre todas las noches a las 00:00
   workflow_dispatch: # Permite ejecutarlo manualmente para probar
-
+concurrency:
+  group: limpieza-cloudinary
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
