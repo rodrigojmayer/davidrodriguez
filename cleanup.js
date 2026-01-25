@@ -1,11 +1,13 @@
-const admin = require("firebase-admin");
-const cloudinary = require("cloudinary").v2;
+import admin from "firebase-admin";
+import { v2 as cloudinary } from "cloudinary";
 
 // 1. Configurar Firebase (Usando variables de entorno de GitHub)
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-admin.initializeApp({
+if (!admin.apps.length) {
+  admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
-});
+  });
+}
 
 const db = admin.firestore();
 
@@ -21,7 +23,14 @@ async function run() {
     const unDiaEnMs = 24 * 60 * 60 * 1000;
 
     // Buscar imagenes marcadas como "deleted"
-    const snapshot = await db.collection("imagenes").where("status", "==", "deleted").get();
+    const snapshot = await db.collection("imagenes")
+        .where("status", "==", "deleted")
+        .get();
+
+    if (snapshot.empty) {
+        console.log("No hay imágenes para eliminar.");
+        return;
+    }
 
     for (const doc of snapshot.docs) {
         const data = doc.data();
@@ -29,10 +38,17 @@ async function run() {
 
         if (ahora - fechaEliminado > unDiaEnMs) {
             console.log(`Eliminado: ${data.publicId}`);
-            // Borrar de Cloudinary
-            await cloudinary.uploader.destroy(data.publicId);
-            // Borrar de Firestore definitivamente
-            await doc.ref.delete();
+           try {
+                // Borrar de Cloudinary
+                await cloudinary.uploader.destroy(data.publicId);
+                // Borrar de Firestore
+                await doc.ref.delete();
+                console.log(`Éxito: ${data.publicId} eliminado.`);
+            } catch (err) {
+                console.error(`Error eliminando ${data.publicId}:`, err);
+            }
+        } else {
+        console.log(`Aún no pasan 24hs para: ${data.publicId}`);
         }
     }
 }
