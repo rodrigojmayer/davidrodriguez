@@ -220,6 +220,7 @@ const App: React.FC = () => {
           url: imageUrl,
           publicId: publicId,
           // category: category, 
+          status: "active",
           title: title,
           featured: false,
           createdAt: new Date()
