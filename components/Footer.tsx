@@ -22,11 +22,11 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex space-x-8">
+          {/* <div className="flex space-x-8">
             <a href="#" className="text-gray-400 hover:text-white transition-colors">Facebook</a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors">Instagram</a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors">WhatsApp</a>
-          </div>
+          </div> */}
 
           <div className="text-center md:text-right">
             <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Taller Rodriguez Camiones.</p>
