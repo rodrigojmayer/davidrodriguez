@@ -10,11 +10,6 @@ const Footer: React.FC = () => {
              <div className="flex items-center space-x-2 mb-4">
               <div className="w-14 h-8 bg-blue-600 rounded flex items-center justify-center font-bold text-white italic">TRC</div>
               {/* Hidden admin trigger for the owner */}
-                {/* <button 
-                  className="fixed bottom-4  w-8 h-8 opacity-100 hover:opacity-10 transition-opacity bg-gray-400 rounded-full"
-                  onClick={() => window.location.hash = '#david'}
-                  title="David"
-                /> */}
               <span className="text-xl font-bold tracking-tight" onClick={() => window.location.hash = '#david'}>Taller Rodriguez Camiones</span>
             </div>
             <p className="text-gray-500 text-sm max-w-xs text-center md:text-left" onClick={() => window.location.hash = '#logout'}>
@@ -22,11 +17,6 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* <div className="flex space-x-8">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Facebook</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">WhatsApp</a>
-          </div> */}
 
           <div className="text-center md:text-right">
             <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Taller Rodriguez Camiones.</p>
