@@ -31,7 +31,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-bold">Ubicación</p>
-                  <p className="text-gray-400">Juan Domingo Perón 2273, Pueblo Esther, Santa Fe</p>
+                  <p className="text-gray-400">Juan Domingo Perón 2572, Pueblo Esther, Santa Fe</p>
                 </div>
               </div>
 
@@ -100,7 +100,7 @@ const Contact: React.FC = () => {
       {/* Map */}
       <div className="rounded-2xl overflow-hidden h-[450px] shadow-2xl border-4 border-white">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d835.8418501631569!2d-60.58573353042455!3d-33.07311759834632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7a80080f6f26f%3A0x7c291f3ca62e93f3!2sJuan%20Domingo%20Per%C3%B3n%202273%2C%20S2126%20Pueblo%20Esther%2C%20Santa%20Fe!5e0!3m2!1ses-419!2sar!4v1769123604017!5m2!1ses-419!2sar" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d835.8418501631569!2d-60.58573353042455!3d-33.07311759834632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7a80080f6f26f%3A0x7c291f3ca62e93f3!2sJuan%20Domingo%20Per%C3%B3n%202572%2C%20S2126%20Pueblo%20Esther%2C%20Santa%20Fe!5e0!3m2!1ses-419!2sar!4v1769123604017!5m2!1ses-419!2sar" 
           width="100%" 
           height="100%" 
           style={{ border: 0 }} 
