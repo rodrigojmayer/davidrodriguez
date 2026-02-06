@@ -8,11 +8,11 @@ const services = [
     description: 'Reparación de choques, enderezado de chasis y recuperación de paneles con precisión milimétrica.',
     icon: ICONS.Hammer
   },
-  {
-    title: 'Pintura Premium',
-    description: 'Cabinas de pintura presurizadas y colorimetría computarizada para un tono 100% exacto al original.',
-    icon: ICONS.Paint
-  },
+  // {
+  //   title: 'Pintura Premium',
+  //   description: 'Cabinas de pintura presurizadas y colorimetría computarizada para un tono 100% exacto al original.',
+  //   icon: ICONS.Paint
+  // },
   {
     title: 'Restauración',
     description: 'Recuperamos vehículos clásicos y de colección devolviéndoles su gloria original con materiales de época.',
@@ -23,11 +23,11 @@ const services = [
     description: 'Tratamientos cerámicos, acrílicos y limpieza de interiores de nivel exposición.',
     icon: ICONS.Sparkle
   },
-  {
-    title: 'Tratamientos Protectores',
-    description: 'Protección contra granizo, rayas y corrosión mediante películas transparentes de alta resistencia.',
-    icon: ICONS.Shield
-  }
+  // {
+  //   title: 'Tratamientos Protectores',
+  //   description: 'Protección contra granizo, rayas y corrosión mediante películas transparentes de alta resistencia.',
+  //   icon: ICONS.Shield
+  // }
 ];
 
 const Services: React.FC = () => {
