@@ -26,7 +26,7 @@ import AdminPanel, { uploadImage } from './components/AdminPanel';
 
 const App: React.FC = () => {
   const [images, setImages] = useState<GalleryImage[]>(() => {
-    // const saved = localStorage.getItem('davidrodriguez_gallery');
+    // const saved = localStorage.getItem('ramon_gallery');
     // return saved ? JSON.parse(saved) : INITIAL_GALLERY;
   });
 
@@ -38,7 +38,7 @@ const App: React.FC = () => {
   const ADMIN_EMAILS = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
   
   // useEffect(() => {
-  //   localStorage.setItem('davidrodriguez_gallery', JSON.stringify(images));
+  //   localStorage.setItem('ramon_gallery', JSON.stringify(images));
   // }, [images]);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // 1. Escuchar el hash de la URL
-    const checkHash = () => setIsAdminMode(window.location.hash === "#david");
+    const checkHash = () => setIsAdminMode(window.location.hash === "#ramon");
     checkHash();
     window.addEventListener("hashchange", checkHash);
 
@@ -139,7 +139,7 @@ const App: React.FC = () => {
   };
 
   // Check if we are in admin mode via hidden hash
-  const showAdmin = currentHash === '#david';
+  const showAdmin = currentHash === '#ramon';
   const login = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
@@ -276,7 +276,7 @@ const App: React.FC = () => {
         </main>
       )}
 
-      {currentHash === "#david" ? "" :
+      {currentHash === "#ramon" ? "" :
         <div className="fixed bottom-6 right-6 z-50">
           <a 
             href="https://wa.me/5493416524309" 
