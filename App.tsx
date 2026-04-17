@@ -279,7 +279,7 @@ const App: React.FC = () => {
       {currentHash === "#ramon" ? "" :
         <div className="fixed bottom-6 right-6 z-50">
           <a 
-            href="https://wa.me/5493416524309" 
+            href="https://wa.me/5493413217654" 
             target="_blank" 
             className="bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all flex items-center justify-center animate-bounce"
           >
